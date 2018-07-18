@@ -2,6 +2,7 @@ import sys
 import openpyxl
 import os
 import socket
+import subprocess
 import csv
 from termcolor import colored
 
@@ -39,7 +40,8 @@ def vulnSearch(id, ip, port):
 		if cmd.find('PORT'):
 			cmd = cmd.replace("PORT", port)
 		print colored(userHostName, 'red', attrs=['bold']) + ':' + colored(directory, 'blue', attrs=['bold']) + '$ ' + cmd
-        	os.system(cmd)
+        	running = subprocess.call(cmd, shell=True)
+		waiting = raw_input("Press enter to continue...")
 
 def getFindings(vulnList):
 		print colored('Reading Rows...', 'green', attrs=['bold'])
